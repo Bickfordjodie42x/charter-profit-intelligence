@@ -36,3 +36,24 @@ def save_trip(trip_price, fuel_cost, maintenance_cost, bait_cost, fixed_overhead
     
     conn.commit()
     conn.close()
+    def get_all_trips():
+    conn = create_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute("SELECT * FROM trips")
+    rows = cursor.fetchall()
+    
+    conn.close()
+    return rows
+
+
+def get_profit_summary():
+    conn = create_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute("SELECT SUM(profit), AVG(profit_margin) FROM trips")
+    summary = cursor.fetchone()
+    
+    conn.close()
+    return summary
+
