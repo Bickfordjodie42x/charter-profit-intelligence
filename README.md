@@ -1,32 +1,57 @@
 # Charter Profit Intelligence Engine
 
-A financial modeling system built to calculate true trip profitability in small fishing charter operations.
+A backend financial modeling system built for small fishing charter operations.
 
-## Problem
+---
 
-Most charter operators know what they charge.
-Few know what they actually keep.
+## Overview
 
-Fuel volatility, maintenance wear, bait costs, and fixed overhead quietly erode margins.
-
-## Solution
-
-This engine calculates:
+This system calculates:
 
 - Fuel cost per trip
 - Maintenance reserve allocation
-- True total trip cost
+- True total operating cost
 - Net profit
 - Profit margin percentage
 - Break-even pricing
+- Historical profit summaries
 
-## Why It Matters
+---
 
-Without accurate cost modeling:
+## Architecture
 
-- Pricing decisions are guesswork
-- Margins shrink silently
-- Peak demand may still be underpriced
-- Cash flow becomes unstable
+profit_engine.py  
+    Core financial calculation logic
 
-This system provides financial clarity for operational control.
+database.py  
+    SQLite persistence layer for trip storage
+
+example_run.py  
+    Execution script demonstrating full workflow
+
+---
+
+## Why This Exists
+
+Charter operators often underprice trips due to incomplete cost modeling.
+
+This system provides:
+
+- Financial clarity
+- Margin visibility
+- Data-backed pricing decisions
+- Historical profit tracking
+
+---
+
+## Future Expansion
+
+- Monthly forecasting
+- Fuel volatility modeling
+- Profit trend visualization
+- Web-based captain dashboard
+- Automated reporting
+
+---
+
+Built for operational control, not guesswork.
