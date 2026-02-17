@@ -7,6 +7,12 @@ from profit_engine import (
     break_even_price
 )
 
+from database import create_table, save_trip
+
+# Ensure table exists
+create_table()
+
+
 # Example trip data
 trip_price = 900
 fuel_price = 3.75
@@ -28,3 +34,19 @@ print("Total Cost:", total_cost)
 print("Profit:", profit)
 print("Profit Margin (%):", margin)
 print("Break Even Price:", breakeven)
+
+print("Break Even Price:", breakeven)
+# Save trip to database
+save_trip(
+    trip_price,
+    fuel,
+    maintenance,
+    bait_cost,
+    fixed_overhead,
+    total_cost,
+    profit,
+    margin
+)
+
+print("Trip successfully saved to database.")
+
