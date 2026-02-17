@@ -7,7 +7,8 @@ from profit_engine import (
     break_even_price
 )
 
-from database import create_table, save_trip
+from database import create_table, save_trip, get_all_trips, get_profit_summary
+
 
 # Ensure table exists
 create_table()
@@ -49,4 +50,12 @@ save_trip(
 )
 
 print("Trip successfully saved to database.")
+# Display summary report
+summary = get_profit_summary()
+
+if summary:
+    total_profit, avg_margin = summary
+    print("\n=== Profit Summary ===")
+    print("Total Profit:", total_profit)
+    print("Average Profit Margin (%):", avg_margin)
 
