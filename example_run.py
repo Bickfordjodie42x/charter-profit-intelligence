@@ -35,7 +35,7 @@ print("Profit:", profit)
 print("Profit Margin (%):", margin)
 print("Break Even Price:", breakeven)
 
-print("Break Even Price:", breakeven)
+
 # Save trip to database
 save_trip(
     trip_price,
