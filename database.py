@@ -24,3 +24,15 @@ def create_table():
     
     conn.commit()
     conn.close()
+def save_trip(trip_price, fuel_cost, maintenance_cost, bait_cost, fixed_overhead, total_cost, profit, profit_margin):
+    conn = create_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute("""
+    INSERT INTO trips 
+    (trip_price, fuel_cost, maintenance_cost, bait_cost, fixed_overhead, total_cost, profit, profit_margin)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """, (trip_price, fuel_cost, maintenance_cost, bait_cost, fixed_overhead, total_cost, profit, profit_margin))
+    
+    conn.commit()
+    conn.close()
