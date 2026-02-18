@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 
 
 def create_connection():
@@ -20,44 +21,57 @@ def create_table():
         fixed_overhead REAL,
         total_cost REAL,
         profit REAL,
-        profit_margin REAL
+        profit_margin REAL,
+        trip_date TEXT
     )
     """)
 
     conn.commit()
     conn.close()
 
-def save_trip(trip_price, fuel_cost, maintenance_cost, bait_cost, fixed_overhead, total_cost, profit, profit_margin):
+
+def save_trip(trip_price, fuel_cost, maintenance_cost, bait_cost, fixed_overhead):
+    total_cost = fuel_cost + maintenance_cost + bait_cost + fixed_overhead
+    profit = trip_price - total_cost
+    profit_margin = (profit / trip_price) * 100 if trip_price != 0 else 0
+    trip_date = datetime.now().strftime("%Y-%m-%d")
+
     conn = create_connection()
     cursor = conn.cursor()
 
     cursor.execute("""
     INSERT INTO trips 
-    (trip_price, fuel_cost, maintenance_cost, bait_cost, fixed_overhead, total_cost, profit, profit_margin)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    """, (trip_price, fuel_cost, maintenance_cost, bait_cost, fixed_overhead, total_cost, profit, profit_margin))
+    (trip_price, fuel_cost, maintenance_cost, bait_cost, fixed_overhead, total_cost, profit, profit_margin, trip_date)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        trip_price,
+        fuel_cost,
+        maintenance_cost,
+        bait_cost,
+        fixed_overhead,
+        total_cost,
+        profit,
+        profit_margin,
+        trip_date
+    ))
 
     conn.commit()
     conn.close()
 
-
-def get_all_trips():
-    conn = create_connection()
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT * FROM trips")
-    rows = cursor.fetchall()
-
-    conn.close()
-    return rows
+    print("Trip saved successfully.")
+    print(f"Total Cost: ${total_cost}")
+    print(f"Profit: ${profit}")
+    print(f"Profit Margin: {profit_margin:.2f}%")
 
 
-def get_profit_summary():
-    conn = create_connection()
-    cursor = conn.cursor()
+# Run setup
+create_table()
 
-    cursor.execute("SELECT SUM(profit), AVG(profit_margin) FROM trips")
-    summary = cursor.fetchone()
-
-    conn.close()
-    return summary
+# Example test entry
+save_trip(
+    trip_price=900,
+    fuel_cost=120,
+    maintenance_cost=50,
+    bait_cost=40,
+    fixed_overhead=100
+)
