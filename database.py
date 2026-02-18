@@ -3,8 +3,7 @@ from datetime import datetime
 
 
 def create_connection():
-    conn = sqlite3.connect("charter_data.db")
-    return conn
+    return sqlite3.connect("charter_data.db")
 
 
 def create_table():
@@ -41,7 +40,8 @@ def save_trip(trip_price, fuel_cost, maintenance_cost, bait_cost, fixed_overhead
 
     cursor.execute("""
     INSERT INTO trips 
-    (trip_price, fuel_cost, maintenance_cost, bait_cost, fixed_overhead, total_cost, profit, profit_margin, trip_date)
+    (trip_price, fuel_cost, maintenance_cost, bait_cost, fixed_overhead,
+     total_cost, profit, profit_margin, trip_date)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         trip_price,
@@ -64,10 +64,11 @@ def save_trip(trip_price, fuel_cost, maintenance_cost, bait_cost, fixed_overhead
     print(f"Profit Margin: {profit_margin:.2f}%")
 
 
-# Run setup
+# ---------- RUN PROGRAM ----------
+
 create_table()
 
-# Example test entry
+# Test entry
 save_trip(
     trip_price=900,
     fuel_cost=120,
