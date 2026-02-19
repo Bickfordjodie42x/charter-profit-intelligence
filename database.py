@@ -70,11 +70,25 @@ def save_trip(trip_price, fuel_cost, maintenance_cost, bait_cost, fixed_overhead
 
 create_table()
 
-# Test entry
-save_trip(
-    trip_price=900,
-    fuel_cost=120,
-    maintenance_cost=50,
-    bait_cost=40,
-    fixed_overhead=100
-)
+def main():
+    print("Charter Profit Entry System")
+    print("----------------------------")
+
+    trip_price = float(input("Trip Price: "))
+    fuel_cost = float(input("Fuel Cost: "))
+    maintenance_cost = float(input("Maintenance Cost: "))
+    bait_cost = float(input("Bait Cost: "))
+    fixed_overhead = float(input("Fixed Overhead: "))
+
+    save_trip(
+        trip_price,
+        fuel_cost,
+        maintenance_cost,
+        bait_cost,
+        fixed_overhead
+    )
+
+
+if __name__ == "__main__":
+    create_table()
+    main()
