@@ -1,4 +1,3 @@
-python
 
 print("RUNNING FILE")
 import sqlite3
